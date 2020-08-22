@@ -1,0 +1,144 @@
+*,
+::after,
+::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+		Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+:root {
+	--smartphone-border: hsla(0, 0%, 25%, 1);
+	--app-background: hsla(0, 0%, 100%, 1);
+	--card-background: hsla(0, 0%, 100%, 1);
+	--smartphone-border-radius: 1.8rem;
+}
+
+.background {
+	display: grid;
+	place-items: center;
+	min-height: 100vh;
+	width: 100%;
+	background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.smartphone {
+	position: relative;
+	display: grid;
+	grid-template-rows: min-content 1fr;
+	width: 375px;
+	height: 812px;
+	border: 1rem solid var(--smartphone-border);
+	border-radius: 3rem;
+	background-color: var(--app-background);
+}
+
+.smartphone::before {
+	content: "";
+	position: absolute;
+	background-color: var(--smartphone-border);
+	width: 12rem;
+	height: 1.5rem;
+	left: 50%;
+	transform: translateX(-50%);
+	border-bottom-right-radius: 1.5rem;
+	border-bottom-left-radius: 1.5rem;
+	z-index: 3;
+}
+
+.smartphone::after {
+	content: "";
+	position: absolute;
+	z-index: 3;
+	height: 3rem;
+	width: 100%;
+	bottom: 0;
+	left: 0;
+	background: linear-gradient(
+		to bottom,
+		hsla(0, 0%, 100%, 0),
+		hsla(0, 0%, 100%, 1) 70%
+	);
+	border-bottom-right-radius: var(--smartphone-border-radius);
+	border-bottom-left-radius: var(--smartphone-border-radius);
+}
+
+.smartphone__navbar {
+	display: grid;
+	grid-template-columns: 1rem 3.5rem 12rem 1fr min-content 1.4rem;
+	height: 1.65rem;
+	align-content: center;
+	justify-items: center;
+	border-top-right-radius: var(--smartphone-border-radius);
+	border-top-left-radius: var(--smartphone-border-radius);
+}
+
+.navbar__time {
+	grid-column: 2/3;
+	font-size: 0.8rem;
+}
+
+.navbar__wifi {
+	grid-column: 4/5;
+	width: 1rem;
+}
+
+.navbar__battery {
+	grid-column: 5/6;
+	width: 1.5rem;
+	height: 50%;
+	background-color: black;
+	border-radius: 0.2rem;
+	align-self: center;
+}
+
+.smartphone__app {
+	overflow-y: scroll;
+	border-bottom-right-radius: var(--smartphone-border-radius);
+	border-bottom-left-radius: var(--smartphone-border-radius);
+	display: grid;
+	grid-template-columns: 1rem 1fr 1rem;
+	grid-auto-rows: min-content;
+	grid-row-gap: 1rem;
+	position: relative;
+}
+
+.smartphone__app::-webkit-scrollbar {
+	width: 0;
+	background: transparent; /* make scrollbar transparent */
+}
+
+/*app header*/
+
+.app__header {
+	grid-column: 2/3;
+	border-bottom: 1px solid lightgrey;
+	padding: 1.5rem 0 0.5rem 0;
+}
+
+.header__container {
+	display: flex;
+}
+
+.header__heart-icon {
+	width: 1.5rem;
+	margin-right: 0.5rem;
+}
+
+.header__date {
+	color: hsla(0, 0%, 35%, 1);
+}
+
+.header__date,
+.header__headline {
+	font-size: 2rem;
+	line-height: 100%;
+}
+
+/*app content*/
+
+.app__content {
+	grid-column: 2/3;
+}
