@@ -1,5 +1,7 @@
 import "./styles.css";
 
-import initTransition from "./animate";
+import initFABTransition from "./animateFab";
+import initInboxTransition from "./animateInbox";
 
-initTransition();
+initFABTransition();
+initInboxTransition();

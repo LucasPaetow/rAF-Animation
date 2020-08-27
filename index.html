@@ -30,12 +30,12 @@
 						</div>
 						<h1 class="header__date">Today</h1>
 					</header>
-					<section class="app__mail app__mail--new">
+					<section class="app__mail app__mail--new open">
 						<header class="mail__header">
 							<h2 class="mail__headline">New</h2>
-							<button class="mail__hide-mail">hide</button>
+							<button class="mail__hide-mail js-toggle-inbox">toggle</button>
 						</header>
-						<ul class="mail__container">
+						<ul class="mail__container js-shrink-inbox">
 							<li class="mail__layout">
 								<div class="mail__image-wrapper">
 									<img
@@ -64,12 +64,12 @@
 							</li>
 						</ul>
 					</section>
-					<section class="app__mail app__mail--new">
+					<section class="app__mail app__mail--seen open">
 						<header class="mail__header">
 							<h2 class="mail__headline">Seen</h2>
-							<button class="mail__hide-mail">hide</button>
+							<button class="mail__hide-mail js-toggle-inbox">toggle</button>
 						</header>
-						<ul class="mail__container">
+						<ul class="mail__container js-shrink-inbox">
 							<li class="mail__layout">
 								<div class="mail__image-wrapper">
 									<img
@@ -111,9 +111,9 @@
 							</li>
 						</ul>
 					</section>
-					<div class="mail__fab-container">
-						<button class="mail__fab">+</button>
-						<ul class="mail__compose-wrapper">
+					<div class="mail__fab-container js-expand-container">
+						<button class="mail__fab js-activate-animation">+</button>
+						<ul class="mail__compose-wrapper js-shrink-container">
 							<li class="mail__compose-option">
 								<div class="mail__image-wrapper mail__image-wrapper--compose">
 									<img
@@ -122,9 +122,7 @@
 										alt="personal avatar"
 									/>
 								</div>
-								<p class="mail__content mail__content--compose">
-									Name Name
-								</p>
+								<p class="mail__content mail__content--compose">Name Name</p>
 							</li>
 							<li class="mail__compose-option">
 								<div class="mail__image-wrapper mail__image-wrapper--compose">
@@ -134,9 +132,7 @@
 										alt="personal avatar"
 									/>
 								</div>
-								<p class="mail__content mail__content--compose">
-									Name Name
-								</p>
+								<p class="mail__content mail__content--compose">Name Name</p>
 							</li>
 							<li class="mail__compose-option">
 								<div class="mail__image-wrapper mail__image-wrapper--compose">
@@ -146,12 +142,10 @@
 										alt="personal avatar"
 									/>
 								</div>
-								<p class="mail__content mail__content--compose">
-									Name Name
-								</p>
+								<p class="mail__content mail__content--compose">Name Name</p>
 							</li>
 							<li class="mail__compose-option">
-								<button class="mail__fab mail__fab--compose">compose</button>
+								<button class="mail__compose-button">compose</button>
 							</li>
 						</ul>
 					</div>
