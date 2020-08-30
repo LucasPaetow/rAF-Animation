@@ -23,7 +23,9 @@ function expandContainer(containerElement) {
 
 			if (progress === 1) {
 				containerElement.classList.remove("hidden");
-				containerElement.classList.remove("transitioning");
+				requestAnimationFrame(() => {
+					containerElement.classList.remove("transitioning");
+				});
 			}
 		},
 	});

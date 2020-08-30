@@ -22,6 +22,8 @@ button:active {
 	--app-background: hsla(0, 0%, 100%, 1);
 	--card-background: hsla(0, 0%, 100%, 1);
 	--smartphone-border-radius: 1.8rem;
+	--color-primary: hsla(206, 95%, 52%, 1);
+	--color-black: hsla(0, 0%, 3%, 1);
 }
 
 .background {
@@ -97,7 +99,7 @@ button:active {
 	grid-column: 5/6;
 	width: 1.5rem;
 	height: 50%;
-	background-color: black;
+	background-color: var(--color-black);
 	border-radius: 0.2rem;
 	align-self: center;
 }
@@ -158,7 +160,7 @@ button:active {
 	border: none;
 	background-color: transparent;
 	border-radius: 0.5rem;
-	color: hsla(206, 95%, 52%, 1);
+	color: var(--color-primary);
 }
 
 .mail__container {
@@ -176,6 +178,22 @@ button:active {
 	grid-template-rows: min-content min-content;
 	grid-row-gap: 0.25rem;
 	grid-column-gap: 1rem;
+	transition: all 100ms ease-in;
+}
+
+.mail__layout:nth-of-type(1) {
+	transition-delay: 50ms;
+	transform: translateX(0);
+}
+
+.mail__layout:nth-of-type(2) {
+	transition-delay: 100ms;
+	transform: translateX(0);
+}
+
+.mail__layout:nth-of-type(3) {
+	transition-delay: 150ms;
+	transform: translateX(0);
 }
 
 .mail__layout:first-of-type {
@@ -198,6 +216,7 @@ button:active {
 
 .transitioning .mail__layout {
 	opacity: 0;
+	transform: translateX(0.2rem);
 }
 
 .hidden .mail__layout {
@@ -228,7 +247,7 @@ button:active {
 
 .mail__subject {
 	font-size: 1rem;
-	color: hsla(0, 0%, 5%, 1);
+	color: var(--color-black);
 }
 
 .mail__content {
@@ -257,7 +276,7 @@ button:active {
 	width: 3.5rem;
 	z-index: 2;
 	border: none;
-	background-color: hsla(206, 95%, 52%, 1);
+	background-color: var(--color-primary);
 	font-size: 1.5rem;
 	color: white;
 	border-radius: 50%;
@@ -340,12 +359,22 @@ button:active {
 	display: none;
 }
 
-.mail__compose-button2 {
+.mail__compose-button--inner {
 	grid-column: 1/3;
 	height: 3.5rem;
 	width: 100%;
-	border: none;
-	background-color: hsla(206, 95%, 52%, 1);
-	font-size: 1rem;
-	color: white;
+	border-radius: unset;
+	box-shadow: unset;
+	font-size: unset;
+}
+
+.mail__disclaimer {
+	font-size: 0.8rem;
+	color: hsla(0, 0%, 55%, 1);
+	text-align: center;
+	padding-top: 0.5rem;
+}
+
+.disclaimer__emoji {
+	padding: 0 0.5rem 0 0;
 }

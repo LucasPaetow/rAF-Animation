@@ -1,7 +1,7 @@
 {
-	"name": "vanilla",
+	"name": "vanilla-raf-animation",
 	"version": "1.0.0",
-	"description": "JavaScript example starter project",
+	"description": "JavaScript rAF animation example",
 	"main": "index.html",
 	"scripts": {
 		"start": "parcel index.html --open",

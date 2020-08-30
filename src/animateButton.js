@@ -39,14 +39,10 @@ function expandButtonContainer() {
 		draw(progress) {
 			// shorthand to let the height/width not start at 0
 			let correctedHeight =
-				finishingHeight * progress < startingHeight
-					? startingHeight
-					: finishingHeight * progress;
+				startingHeight + (finishingHeight - startingHeight) * progress;
 
 			let correctedWidth =
-				finishingWidth * progress < startingWidth
-					? startingWidth
-					: finishingWidth * progress;
+				startingWidth + (finishingWidth - startingWidth) * progress;
 
 			//graduelly hide the button
 			composeButton.style.opacity = 1 - progress * 1.25;
@@ -96,14 +92,10 @@ function shrinkButtonContainer() {
 		draw(progress) {
 			// shorthand to let the height/width not start at 0
 			let correctedHeight =
-				finishingHeight * (1 - progress) < startingHeight
-					? startingHeight
-					: finishingHeight * (1 - progress);
+				startingHeight + (finishingHeight - startingHeight) * (1 - progress);
 
 			let correctedWidth =
-				finishingWidth * (1 - progress) < startingWidth
-					? startingWidth
-					: finishingWidth * (1 - progress);
+				startingWidth + (finishingWidth - startingWidth) * (1 - progress);
 
 			//graduelly hide the button
 			composeMenu.style.opacity = 1 - progress * 1.25;
@@ -112,11 +104,11 @@ function shrinkButtonContainer() {
 
 			/*both elements start from the same appearence (the button's) and transition to the end appearence (the menu's)*/
 
-			//unround the button and the menu
+			//round the button and the menu
 			composeButton.style.borderRadius = `${50 * progress}%`;
 			composeMenu.style.borderRadius = `${50 * progress}%`;
 
-			//scale the button and menu up
+			//scale the button and menu down
 			composeButton.style.minHeight = `${correctedHeight}px`;
 			composeButton.style.minWidth = `${correctedWidth}px`;
 
