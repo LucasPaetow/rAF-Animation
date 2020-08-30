@@ -1,8 +1,7 @@
 import animate from "./animationLibrary";
-import { easeOutCubic, easeInOutQuart } from "./animationTimings";
+import { easeOutCubic } from "./animationTimings";
 
 const toggleButton = document.querySelectorAll(".js-toggle-inbox");
-const inboxContainer = document.querySelector(".js-shrink-inbox");
 
 function expandContainer(containerElement) {
 	// init transition and start hiding elements
