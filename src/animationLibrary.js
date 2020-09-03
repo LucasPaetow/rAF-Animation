@@ -1,9 +1,9 @@
 export default function animate({ timing, draw, duration }) {
-	let start = performance.now();
+	let startTime = performance.now();
 
-	requestAnimationFrame(function animate(time) {
+	requestAnimationFrame(function animate(currentTime) {
 		// timeFraction goes from 0 to 1
-		let timeFraction = (time - start) / duration;
+		let timeFraction = (currentTime - startTime) / duration;
 		if (timeFraction > 1) timeFraction = 1;
 
 		// calculate the current animation state
