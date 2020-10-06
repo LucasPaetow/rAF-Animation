@@ -1,16 +1,16 @@
 # Performant Animations, Part 2: requestAnimationFrame
 
-The Javascript way
+## The Javascript way
 
-When animations get more complex and page reflows can’t be avoided, we need help from JavaScript to achieve smooth motion.
+When animations get more complex and page reflows (the browser's process of recalculating element dimensions [Read more about it in the first part of this series](link-to-part-one)) can’t be avoided, we need help from JavaScript to achieve smooth motion.
 
 Since we don’t have something like CSS transitions yet (while there is a web animation API, [it's support is still not great for older browsers](https://caniuse.com/#search=Web%20Animations%20API)), we need to create our own by manually updating the screen in many little steps, making it seem more fluid.
 
-Previously, `setTimeout` or `setIntervall` were used for this stepping-mechanismn with a time of `1000/60` milliseconds to run once a frame (of a 60hz display). But sometimes, depending on the complexity of the animation, the browser can’t make it with the calculation to the next repaint. The animation wouldn't progress in the current frame but twice in the next one. This effect gets noticeable and the animation might appear to be buggy.
+Previously, `setTimeout` or `setInterval` were used for this 'updating-the-screen-in-many-little-steps'-mechanismn. To make them run every frame of a 60hz display, they both were given a timing argument of `1000/60` milliseconds. But sometimes, depending on the complexity of the animation, the browser can’t make it with the calculation to the next screen update / interval / step (roughly 10ms). The animation wouldn't progress in the current frame but twice in the next one. This effect can add up and the animation might appear to be buggy.
 
 #### requestAnimationFrame to the rescue.
 
-`requestAnimationFrame` helps to orchestrate the animations and will ensure to run a callback / an animation step before the next repaint. It tells the browser about the intention of animating something and the browser in return can prepare and optimize beforehand.
+`requestAnimationFrame` helps to orchestrate the animations and will ensure to run a callback / an animation step before the next screen update. It tells the browser about the intention of animating something and the browser in return can prepare and optimize beforehand.
 Keep in mind that this function is only animating one frame. To use this in a full-scale animation, it needs to run recursively:
 
 This is a very basic animation function taken from [JavaScript.info](https://javascript.info/js-animation):
@@ -38,7 +38,7 @@ function animate({timing, draw, duration}) {
 
 (This might look complicated at first but don’t be intimidated, we will go through this in a bit)
 
-It will be used like this (e.g. for animating width)
+It will be used like this (e.g. for animating width):
 
 ```
 let element = document.getElementByID("progres")
@@ -54,19 +54,19 @@ animate({
 });
 ```
 
-Implementing this animation "engine" can be done differently but most implementations revolve around some key points:
+Implementing this "animation engine" can be done differently but most implementations revolve around some key points:
 
-- a way to keep track of the animation progress (time elapsed vs time remaining),
+- a way to keep track of the animation progress (time elapsed of a total time can be expressed as progress),
 - the change in the DOM layout based on the progress
 - recalling or stopping itself
 
 #### The Animation Function explained
 
-1. The whole animation function starts with a starting time, which is kept alive in a closure (or stored in a variable)
+1. The whole animation function begins by setting a starting time, which is kept alive in a closure (or stored in a variable)
 2. The inner function is called within the next frame
 3. In here the current time fraction gets determined by substracting the starting time from the current time
 
-(note for the time parameter: requestAnimationFrame automatically gets a timestamp as an argument when it is called, which is used here for the current time. Both `currentTime` and `startTime` are milliseconds since time origin).
+(note for the time parameter: requestAnimationFrame automatically gets a timestamp as an argument when it is called, which is used here for the current time).
 
 The resulting difference will be divided by the duration to give us a value between 0 and 1 of how much of the full duration is already passed. 4. This "time fraction" is then transformed to fit an easing curve (or a curve on a xy - coordinate graph — suddenly math becomes useful again)
 
@@ -83,7 +83,7 @@ function quad(timeFraction) {
 more easing functions can be found here [Easing Functions Cheat Sheet](https://easings.net/)
 
 5. The transformed timing fraction (progress) is then given to the drawing function. Since it is always between 0 and 1, it's great for percentage-based values
-6. The last step is to determine if the function should run again. This is also based on the timing fragment and the reason why it can’t or shouldn't succeed 1 as value, because 1 means 100% of the duration is passed.
+6. The last step is to determine if the function should run again. This is also based on process and the reason why it can’t or shouldn't succeed 1 as value, because 1 means 100% of the duration is passed.
 
 #### Great, lets see it in action
 
@@ -96,11 +96,11 @@ CODE EXAMPLE
 
 ---
 
-#### Some tipps and tricks
+#### Some tips and tricks
 
-- If you want to animate properties which you also need for the calculations, like `height` or `width`, you can use `minHeight/ maxHeight` or `minWidth/maxWidth` for the animation instead. This way you dont have difficulties to recalculate the original values again.
+- If you want to animate properties which you also need for the calculations, like `height` or `width`, you can use `minHeight/ maxHeight` or `minWidth/maxWidth` for the animation instead. This way you dont have difficulties recalculating the original values again.
 
-- Animating values from 0 to your desired value is just `desiredValue * progress` and the opposite is `desiredValue * (1-progress)` but if you want to animate partial values to 1, the formular gets a little more compliated:
+- Animating values from 0 to your desired value is just `desiredValue * progress` and the opposite is `desiredValue * (1-progress)` but if you want to animate partial values to 1, the formula gets a little more complicated:
 
 -- `partialValue + (desiredValue - partialValue) * progress` or for the opposite `partialValue + (desiredValue - partialValue) * (1 * progress)`
 
