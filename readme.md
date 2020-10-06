@@ -2,15 +2,15 @@
 
 The Javascript way
 
-When animations get more complex and page reflows can’t be avoided, we need help from javascript to achieve smooth motion.
+When animations get more complex and page reflows can’t be avoided, we need help from JavaScript to achieve smooth motion.
 
-But since we don’t have something like CSS transitions yet (there is a web animation API but it's support is still not great for older browsers [Can I use… Support tables for HTML5, CSS3, etc](https://caniuse.com/#search=Web%20Animations%20API)), we need to create our own by manually updating the screen in many little steps, to make it seems like a fluid animation.
+Since we don’t have something like CSS transitions yet (while there is a web animation API, [it's support is still not great for older browsers](https://caniuse.com/#search=Web%20Animations%20API)), we need to create our own by manually updating the screen in many little steps, making it seem more fluid.
 
-Historically, `setTimeout` or `setIntervall` were used for this stepping with a time of `1000/60` milliseconds to run once a frame (of a 60hz display). But sometimes, depending on the complexity of the animation, the browser can’t make it with the calculation to the next repaint. The animation won’t progress in the current frame but twice in the next one. This Effect starts to get noticeable and the animation appears to be buggy.
+Previously, `setTimeout` or `setIntervall` were used for this stepping-mechanismn with a time of `1000/60` milliseconds to run once a frame (of a 60hz display). But sometimes, depending on the complexity of the animation, the browser can’t make it with the calculation to the next repaint. The animation wouldn't progress in the current frame but twice in the next one. This effect gets noticeable and the animation might appear to be buggy.
 
 #### requestAnimationFrame to the rescue.
 
-`requestAnimationFrame` helps to orchestrate the animations and will guarantee to run a callback / an animation step before the next repaint. It tells the browser about the intention of animating something and the browser in return can prepare and optimize beforehand.
+`requestAnimationFrame` helps to orchestrate the animations and will ensure to run a callback / an animation step before the next repaint. It tells the browser about the intention of animating something and the browser in return can prepare and optimize beforehand.
 Keep in mind that this function is only animating one frame. To use this in a full-scale animation, it needs to run recursively:
 
 This is a very basic animation function taken from [JavaScript.info](https://javascript.info/js-animation):
@@ -54,7 +54,7 @@ animate({
 });
 ```
 
-Implementing this animation "engine" can be done differently but most implementations evolve around some key points:
+Implementing this animation "engine" can be done differently but most implementations revolve around some key points:
 
 - a way to keep track of the animation progress (time elapsed vs time remaining),
 - the change in the DOM layout based on the progress
@@ -68,7 +68,7 @@ Implementing this animation "engine" can be done differently but most implementa
 
 (note for the time parameter: requestAnimationFrame automatically gets a timestamp as an argument when it is called, which is used here for the current time. Both `currentTime` and `startTime` are milliseconds since time origin).
 
-The resulting difference will be divided by the duration to give us a value between 0 and 1 of how much of the full duration is already passed. 4. This "time fraction" is then transformed to fit an easing curve (or a curve on a xy - coordinate graph — suddenly math became useful again)
+The resulting difference will be divided by the duration to give us a value between 0 and 1 of how much of the full duration is already passed. 4. This "time fraction" is then transformed to fit an easing curve (or a curve on a xy - coordinate graph — suddenly math becomes useful again)
 
 - not transforming the values at all (just returning them) is equal to a linear easing. For example a linear progression for numbers from 0-1 could be `0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1`
 - In something else, like an ease-in function, the numbers would be transformed to the power of 2 (seen below) and our example numbers from the linear progression would look differently: `0.01, 0.04, 0.09, 0.16, 0.25, 0.36, 0.49, 0.64, 0.81, 1`. They start much slower at first but progress faster in the second half
@@ -82,7 +82,7 @@ function quad(timeFraction) {
 
 more easing functions can be found here [Easing Functions Cheat Sheet](https://easings.net/)
 
-5. The transformed timing fraction (progress) is then giving to the drawing function. Since it is always between 0 and 1, it's great for percentage-based values
+5. The transformed timing fraction (progress) is then given to the drawing function. Since it is always between 0 and 1, it's great for percentage-based values
 6. The last step is to determine if the function should run again. This is also based on the timing fragment and the reason why it can’t or shouldn't succeed 1 as value, because 1 means 100% of the duration is passed.
 
 #### Great, lets see it in action
