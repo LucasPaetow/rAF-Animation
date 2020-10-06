@@ -98,7 +98,7 @@ CODE EXAMPLE
 
 #### Some tipps and tricks
 
-- If you want to animate properties which you also need for the calculations, like `height` or `width`, you can use `minHeight/ maxHeight` minWidth/maxWidth` for the animation instead. This way you dont have difficulties to recalculate the original values again.
+- If you want to animate properties which you also need for the calculations, like `height` or `width`, you can use `minHeight/ maxHeight` or `minWidth/maxWidth` for the animation instead. This way you dont have difficulties to recalculate the original values again.
 
 - Animating values from 0 to your desired value is just `desiredValue * progress` and the opposite is `desiredValue * (1-progress)` but if you want to animate partial values to 1, the formular gets a little more compliated:
 
