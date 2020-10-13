@@ -1,4 +1,4 @@
-import animate from "./animationLibrary";
+import animateWith from "./animationLibrary";
 import { easeOutCubic } from "./animationTimings";
 
 const toggleButton = document.querySelectorAll(".js-toggle-inbox");
@@ -14,10 +14,10 @@ function expandContainer(containerElement) {
 
 	let targetHeight = expandTarget.style.height.split("px")[0];
 
-	animate({
+	animateWith({
 		duration: 500,
-		timing: easeOutCubic,
-		draw(progress) {
+		easing: easeOutCubic,
+		animationStep(progress) {
 			expandTarget.style.maxHeight = `${progress * targetHeight}px`;
 
 			if (progress === 1) {
@@ -46,10 +46,10 @@ function shrinkContainer(containerElement) {
 	//removing them will make the page reflow calulations easier for the browser
 	containerElement.classList.add("hidden");
 
-	animate({
+	animateWith({
 		duration: 500,
-		timing: easeOutCubic,
-		draw(progress) {
+		easing: easeOutCubic,
+		animationStep(progress) {
 			shrinkTarget.style.maxHeight = `${(1 - progress) * shrinkTargetHeight}px`;
 
 			if (progress === 1) {

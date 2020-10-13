@@ -1,4 +1,4 @@
-import animate from "./animationLibrary";
+import animateWith from "./animationLibrary";
 import { easeOutCubic, easeInOutQuart } from "./animationTimings";
 
 const composeButton = document.querySelector(".js-activate-animation");
@@ -33,10 +33,10 @@ function expandButtonContainer() {
 	//need to be calculated(they will get a display: hidden)
 	animationContainer.classList.add("hidden");
 
-	animate({
+	animateWith({
 		duration: 500,
-		timing: easeOutCubic,
-		draw(progress) {
+		easing: easeOutCubic,
+		animationStep(progress) {
 			// shorthand to let the height/width not start at 0
 			let correctedHeight =
 				startingHeight + (finishingHeight - startingHeight) * progress;
@@ -86,10 +86,10 @@ function shrinkButtonContainer() {
 	//need to be calculated(they will get a display: hidden)
 	animationContainer.classList.add("hidden");
 
-	animate({
+	animateWith({
 		duration: 500,
-		timing: easeInOutQuart,
-		draw(progress) {
+		easing: easeInOutQuart,
+		animationStep(progress) {
 			// shorthand to let the height/width not start at 0
 			let correctedHeight =
 				startingHeight + (finishingHeight - startingHeight) * (1 - progress);
